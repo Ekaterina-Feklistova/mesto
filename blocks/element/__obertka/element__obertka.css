@@ -1,0 +1,10 @@
+.element__obertka {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+@media screen and (max-width: 767px) {
+    .element__obertka {
+        max-width: 100%;
+    }
+}

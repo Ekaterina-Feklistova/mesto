@@ -1,0 +1,19 @@
+.profile__button-big {
+    display: none;
+}
+@media screen and (max-width: 767px) {
+    .profile__button-big {
+        background-image: url(../../../images/Button-pluse_big.svg);
+        background-color: #000000;
+        background-repeat: no-repeat;
+        border: none;
+        display: block;
+        background-size: contain;
+        width: 282px;
+        height: 50px;
+        align-self: center;
+    }
+    .profile__button-big:hover {
+        opacity: 0.6;
+    }
+}

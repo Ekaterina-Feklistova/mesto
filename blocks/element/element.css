@@ -1,0 +1,10 @@
+.element {
+    background: #FFFFFF;
+    border-radius: 10px;
+    min-height: 361px;
+}
+@media screen and (max-width: 767px) {
+    .element {
+        max-width: 282px;
+    }
+}

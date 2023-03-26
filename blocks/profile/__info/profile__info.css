@@ -1,0 +1,17 @@
+.profile__info {
+    max-width: 100%;
+    max-height: max-content;
+    padding-left: 30px;
+    padding-right: 30px;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+@media screen and (max-width: 879px) {
+
+}
+@media screen and (max-width: 767px) {
+    .profile__info {
+        padding: 0;
+        padding-bottom: 36px;
+    }
+}
