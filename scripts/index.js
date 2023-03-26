@@ -1,7 +1,7 @@
 //ищем в html кнопку карандашик //
 const buttonPencil = document.querySelector('.button-open');
 //ищем в html попап с карандашиком //
-const popupPencil = document.querySelector('.popup__pencil');
+const popupPencil = document.querySelector('.popup_pencil');
 //ищем в html кнопку закрытия попапа с карандашиком //
 const pencilClose = popupPencil.querySelector('.popup__close');
 //ищем копопку Сохранить //
