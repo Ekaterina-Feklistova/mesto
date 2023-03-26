@@ -1,7 +1,7 @@
 //ищем в html кнопку карандашик //
 const buttonPencil = document.querySelector('.button-open');
 //ищем в html попап с карандашиком //
-const popupPencil = document.querySelector('.popup_pencil');
+const popupPencil = document.querySelector('.popup__pencil');
 //ищем в html кнопку закрытия попапа с карандашиком //
 const pencilClose = popupPencil.querySelector('.popup__close');
 //ищем копопку Сохранить //
@@ -33,3 +33,4 @@ ProfileForm.addEventListener("submit", (event) => {
     professionProfile.innerHTML = professoinInput.value;
     popupPencil.classList.remove('popup_open');
 });
+console.log(popupPencil);

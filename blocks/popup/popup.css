@@ -8,6 +8,6 @@
     align-items: center;
     justify-content: center;
     z-index: 666;
-    display: none;
     background-color: rgba(0, 0, 0, 0.6);
+    visibility: hidden;
 }
