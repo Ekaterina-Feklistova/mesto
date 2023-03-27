@@ -5,15 +5,16 @@
 @import url(../blocks/header/header.css);
 @import url(../blocks/header/__logo/header__logo.css);
 
+@import url(../blocks/main/main.css);
+
 @import url(../blocks/profile/profile.css);
 @import url(../blocks/profile/__avatar/profile__avatar.css);
 @import url(../blocks/profile/__info/profile__info.css);
-@import url(../blocks/profile/__obertka/profile__obertka.css);          /*не знаю нужна ли???*/
+@import url(../blocks/profile/__obertka/profile__obertka.css);
 @import url(../blocks/profile/__title/profile__title.css);
 @import url(../blocks/profile/__subtitle/profile__subtitle.css);
 @import url(../blocks/profile/__button-info/profile__button-info.css);
 @import url(../blocks/profile/__button/profile__button.css);
-@import url(../blocks/profile/__button-big/profile__button-big.css);
 
 @import url(../blocks/elements/elements.css);
 @import url(../blocks/element/element.css);
@@ -23,12 +24,13 @@
 @import url(../blocks/element/__like/element__like.css);
 
 @import url(../blocks/footer/footer.css);
+@import url(../blocks/footer/__title/footer__title.css);
 
 @import url(../blocks/popup/popup.css);
 @import url(../blocks/popup/__container/popup__container.css);
 @import url(../blocks/popup/__close/popup__close.css);
 @import url(../blocks/popup/__title/popup__title.css);
 @import url(../blocks/popup/__input/popup__input.css);
-@import url(../blocks/popup/_open/popup_open.css);
+@import url(../blocks/popup/_open/popup_opened.css);
 @import url(../blocks/popup/__form/popup__form.css);
 @import url(../blocks/popup/__submit/popup__submit.css);

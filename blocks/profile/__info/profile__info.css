@@ -6,12 +6,9 @@
     margin-top: auto;
     margin-bottom: auto;
 }
-@media screen and (max-width: 879px) {
-
-}
 @media screen and (max-width: 767px) {
     .profile__info {
         padding: 0;
-        padding-bottom: 36px;
+        padding-bottom: 32px;
     }
 }

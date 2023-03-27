@@ -2,12 +2,8 @@
     max-width: 100%;
     margin-top: 66px;
     margin-bottom: 60px;
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 18px;
-    line-height: 22px;
-    color: #545454;
+    /* липкий футер */
+    flex-shrink: 0;
 }
 @media screen and (max-width: 879px) {
     .footer {
@@ -19,7 +15,8 @@
 }
 @media screen and (max-width: 767px) {
     .footer {
-        max-width: 282px;
+        padding: 0;
+        min-width: 282px;
         margin-top: 48px;
         margin-bottom: 36px;
         font-size: 14px;
