@@ -1,11 +1,9 @@
-//ищем в html кнопку карандашик //
+//ищем в html кнопку //
 const ButtonPencil = document.querySelector('.button-open');
 //ищем в html попап с карандашиком //
 const PopupPencil = document.querySelector('.popup_pencil');
 //ищем в html кнопку закрытия попапа с карандашиком //
 const PencilClose = PopupPencil.querySelector('.popup__close');
-//ищем копопку Сохранить //
-const ProfileSubmit = PopupPencil.querySelector('.popup__submit')
 //ищем форму//
 const ProfileForm = PopupPencil.querySelector('.popup__form')
 //ищем в html форму ввода имени профиля и профессии//
@@ -16,14 +14,14 @@ let NameProfile = document.querySelector('.profile__title')
 let ProfessionProfile = document.querySelector('.profile__subtitle')
 //открытие попапа "Редактировать профиль"//
 ButtonPencil.addEventListener('click', function(){
-    open();
+    OpenPopap();
     NameInput.value = NameProfile.textContent;
     ProfessoinInput.value = ProfessionProfile.textContent;
 });
 
 //закрытие попапа "Редактировать профиль"//
 PencilClose.addEventListener('click', function(){
-    close();
+    ClosePopap();
 });
 
 //обработчик события на кнопке Сохранить//
@@ -31,15 +29,15 @@ ProfileForm.addEventListener('submit', (event) => {
     event.preventDefault();
     NameProfile.textContent = NameInput.value;
     ProfessionProfile.textContent = ProfessoinInput.value;
-    close();
+    ClosePopap();
 });
 
 //многоразовая функция Открытия//
-function open(){
+function OpenPopap(){
     PopupPencil.classList.add('popup_opened');
 };
 
 //многоразовая функция Закрытия//
-function close() {
+function ClosePopap() {
     PopupPencil.classList.remove('popup_opened');
 };

@@ -14,7 +14,7 @@
     text-align: center;
     color: #FFFFFF;
     padding: 14px 124px 18px 125px;
-    margin-top: 22px;
+    margin-top: 10px;
     margin-bottom: 37px;
     cursor: pointer;
 }
@@ -28,5 +28,6 @@
         font-size: 14px;
         line-height: 17px;
         margin-bottom: 25px;
+        margin-top: 5px;
     }
 }
