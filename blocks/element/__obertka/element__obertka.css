@@ -1,7 +1,10 @@
 .element__obertka {
-    display: flex;
+    margin: 25px 15px 31px 21px;
+    display: grid;
+    grid-template-columns: 5fr 1fr;
     justify-content: space-between;
     align-items: baseline;
+    max-width: 246px;
 }
 @media screen and (max-width: 767px) {
     .element__obertka {

@@ -6,8 +6,8 @@
     background-size: contain;
     padding: 0;
     width: 22px;
-    height: 18px;
-    margin-right: 20px;
+    height: 19px;
+    justify-self: end;
     cursor: pointer;
 }
 .element__like:hover {
