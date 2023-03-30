@@ -1,43 +1,44 @@
 //ищем в html кнопку //
-const ButtonPencil = document.querySelector('.button-open');
+const buttonPencil = document.querySelector('.profile__button-info');
 //ищем в html попап с карандашиком //
-const PopupPencil = document.querySelector('.popup_pencil');
+const popupPencil = document.querySelector('.popup');
 //ищем в html кнопку закрытия попапа с карандашиком //
-const PencilClose = PopupPencil.querySelector('.popup__close');
+const pencilClose = popupPencil.querySelector('.popup__close');
 //ищем форму//
-const ProfileForm = PopupPencil.querySelector('.popup__form')
+const profileForm = popupPencil.querySelector('.popup__form')
 //ищем в html форму ввода имени профиля и профессии//
-const NameInput = PopupPencil.querySelector('.popup__input_type_name');
-const ProfessoinInput = PopupPencil.querySelector('.popup__input_type_subname');
+const nameInput = popupPencil.querySelector('.popup__input_type_name');
+const professoinInput = popupPencil.querySelector('.popup__input_type_subname');
 
-let NameProfile = document.querySelector('.profile__title')
-let ProfessionProfile = document.querySelector('.profile__subtitle')
+let nameProfile = document.querySelector('.profile__title')
+let professionProfile = document.querySelector('.profile__subtitle')
+
 //открытие попапа "Редактировать профиль"//
-ButtonPencil.addEventListener('click', function(){
-    OpenPopap();
-    NameInput.value = NameProfile.textContent;
-    ProfessoinInput.value = ProfessionProfile.textContent;
+buttonPencil.addEventListener('click', function(){
+    openPopap();
+    nameInput.value = nameProfile.textContent;
+    professoinInput.value = professionProfile.textContent;
 });
 
 //закрытие попапа "Редактировать профиль"//
-PencilClose.addEventListener('click', function(){
-    ClosePopap();
+pencilClose.addEventListener('click', function(){
+    closePopap();
 });
 
 //обработчик события на кнопке Сохранить//
-ProfileForm.addEventListener('submit', (event) => {
+profileForm.addEventListener('submit', (event) => {
     event.preventDefault();
-    NameProfile.textContent = NameInput.value;
-    ProfessionProfile.textContent = ProfessoinInput.value;
-    ClosePopap();
+    nameProfile.textContent = nameInput.value;
+    professionProfile.textContent = professoinInput.value;
+    closePopap();
 });
 
 //многоразовая функция Открытия//
-function OpenPopap(){
-    PopupPencil.classList.add('popup_opened');
+function openPopap(){
+    popupPencil.classList.add('popup_opened');
 };
 
 //многоразовая функция Закрытия//
-function ClosePopap() {
-    PopupPencil.classList.remove('popup_opened');
+function closePopap() {
+    popupPencil.classList.remove('popup_opened');
 };

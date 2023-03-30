@@ -5,7 +5,7 @@
     background-origin: content-box;
     border: 1px solid #FFFFFF;
     display: flex;
-    background-size: contain;
+    background-size: cover;
     width: 24px;
     height: 24px;
     padding: 7px;

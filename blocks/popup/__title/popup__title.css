@@ -12,9 +12,6 @@
     line-height: 29px;
     vertical-align: top;
     color: #000000;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
 }
 @media screen and (max-width: 767px) {
     .popup__title {
