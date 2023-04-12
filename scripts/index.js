@@ -1,52 +1,41 @@
-//ищем в html кнопку
-const buttonPencil = document.querySelector('.profile__button-info');
-//ищем в html попап с карандашиком
-const popupPencil = document.querySelector('.popup');
-//ищем в html кнопку закрытия попапа с карандашиком
-const pencilClose = popupPencil.querySelector('.popup__close');
-//ищем форму//
-const profileForm = popupPencil.querySelector('.popup__form')
-//ищем в html форму ввода имени профиля и профессии
-const nameInput = popupPencil.querySelector('.popup__input_type_name');
-const professoinInput = popupPencil.querySelector('.popup__input_type_subname');
+//Редактирования Профиля
+const buttonPencil = document.querySelector('.profile__button-info'); //ищем в html кнопку редактирования профиля
+const popupProfile = document.querySelector('.popup'); //ищем в html попап с карандашиком
+const pencilClose = popupProfile.querySelector('.popup__close'); //ищем в html кнопку закрытия попапа с карандашиком
+const profileForm = popupProfile.querySelector('.popup__form'); //ищем форму//
+const nameInput = popupProfile.querySelector('.popup__input_type_name'); //ищем в html форму ввода имени профиля
+const professoinInput = popupProfile.querySelector('.popup__input_type_subname'); //и профессии
 
-let nameProfile = document.querySelector('.profile__title')
-let professionProfile = document.querySelector('.profile__subtitle')
+let nameProfile = document.querySelector('.profile__title');
+let professionProfile = document.querySelector('.profile__subtitle');
 
-//открытие попапа "Редактировать профиль"
-buttonPencil.addEventListener('click', function(){
-    openPopap();
+buttonPencil.addEventListener('click', () => { //открытие попапа "Редактировать профиль"
+    openPopup(popupProfile);
     nameInput.value = nameProfile.textContent;
     professoinInput.value = professionProfile.textContent;
 });
 
-//закрытие попапа "Редактировать профиль"
-pencilClose.addEventListener('click', function(){
-    closePopap();
+pencilClose.addEventListener('click', () => { //закрытие попапа "Редактировать профиль"
+    closePopup(popupProfile);
 });
 
-//обработчик события на кнопке Сохранить
-profileForm.addEventListener('submit', (event) => {
+profileForm.addEventListener('submit', (event) => { //обработчик события на кнопке Сохранить
     event.preventDefault();
     nameProfile.textContent = nameInput.value;
     professionProfile.textContent = professoinInput.value;
-    closePopap();
+    closePopup(popupProfile);
 });
 
 //многоразовая функция Открытия
-function openPopap(){
-    popupPencil.classList.add('popup_opened');
+const openPopup = (popup)=>{
+    popup.classList.add('popup_opened');
 };
 
 //многоразовая функция Закрытия
-function closePopap() {
-    popupPencil.classList.remove('popup_opened');
+const closePopup = (popup)=> {
+    popup.classList.remove('popup_opened');
 };
-
-//ищем место для галереи фотографий мест
-const galeryList = document.querySelector('.elements');
-const galeryTemplate = document.querySelector('.element__template').content;
-
+////////////////////////////////////////////////////////////////////////////
 //массив с фотографиями мест
 const initialCards = [
   {
@@ -75,60 +64,77 @@ const initialCards = [
   }
 ];
 //добавление массива в html
+//ищем место для галереи фотографий мест
+const galeryList = document.querySelector('.elements');
+const galeryTemplate = document.querySelector('.element__template').content;
+
 initialCards.forEach(function(element){
   
-  const galeryElement = galeryTemplate.cloneNode(true);
-  galeryElement.querySelector('.element__image').src = element.link;
-  galeryElement.querySelector('.element__title').textContent = element.name;
+  const cardsElement = galeryTemplate.cloneNode(true);
+  cardsElement.querySelector('.element__image').src = element.link;
+  cardsElement.querySelector('.element__title').textContent = element.name;
+  
+  //увеличение картинок
+  let popupImage = document.querySelector('.popup__zoom-card');
+  let openImage = document.querySelector('.popup__zoom-image').src;
+  let openTitle = document.querySelector('.popup__zoome-title');
+  function openPopupImage(){
+    popupImage.classList.add('popup_opened');
+  }
+  popupImage.addEventListener('click', (evt)=>{
+    openPopupImage()
+    element.link = openImage;
+    
+  });
 
-  galeryList.append(galeryElement);
-});
-
-//лайки
-function buttonLikes (){
-   document.querySelector('.element__like').onclick = (evt)=>{
+  //лайки
+  cardsElement.querySelector('.element__like').addEventListener('click', function(evt){
     evt.target.classList.toggle('element__like_active');
-  };
-};
-console.log(buttonLikes);
-/*document.querySelector('.element__like').onclick = function(evt){
-  evt.target.classList.toggle('element__like_active');
-}*/
+  });
+  
+  //удаление
+  cardsElement.querySelector('.element__delete').addEventListener('click', function(evt){
+    const listItem = evt.target.closest('.element');
+    listItem.remove();
+  });
 
+  galeryList.append(cardsElement);
+});
 
 //ищем кнопку добавления +
 const addMestoButton = document.querySelector('.profile__button');
-const popupAdd = document.querySelector('.popup__add');
+const popupAddMesto = document.querySelector('.popup__add');
 //ищем в html кнопку закрытия попапа добавить
-const popupCloseAdd = document.querySelector('.popup__close-add');
+const popupCloseMesto = document.querySelector('.popup__close-add');
 
 //открытие попапа "Добавить место"
-addMestoButton.addEventListener('click', function(){
-  openPopupAdd();
+addMestoButton.addEventListener('click', () => {
+  openPopup(popupAddMesto);
 });
 
 //закрытие попапа "Добавить место"
-popupCloseAdd.addEventListener('click', function(){
-  closePopupAdd();
+popupCloseMesto.addEventListener('click', () => {
+  closePopup(popupAddMesto);
 });
 
-const addForm  = popupAdd.querySelector('.popup__form-add')
-//обработчик события на кнопке Сохранить в попапе "Добавить место"
-addForm.addEventListener('submit', (event) => {
-  event.preventDefault();
-  initialCards.unshift('.popup__input_type_mesto', '.popup__input_type_image');
-  
-  /*nameProfile.textContent = nameInput.value;
-  professionProfile.textContent = professoinInput.value;*/
-  closePopupAdd();
-});
+//добавление картинки в "Место"
+const renderImageElement = (cardsElement) => {
+  galeryList.prepend(cardsElement);
+}
+const editImageForm = document.querySelector('.popup__form-add');
+const handleEditImageSubmit = (evt) => {
+  evt.preventDefault();
 
-//многоразовая функция Открытия
-function openPopupAdd(){
-  popupAdd.classList.add('popup_opened');
-};
+  const nameMesto = editImageForm.querySelector('.popup__input_type_mesto');
+  const imageMesto = editImageForm.querySelector('.popup__input_type_image');
 
-//многоразовая функция Закрытия
-function closePopupAdd() {
-  popupAdd.classList.remove('popup_opened');
-};
+  const name = nameMesto.value;
+  const link = imageMesto.value;
+
+  const mestoData = {
+    name,
+    link,
+  };
+  renderImageElement(galeryTemplate(mestoData));
+  closePopup(editImageForm);
+}
