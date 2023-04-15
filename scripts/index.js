@@ -75,16 +75,16 @@ initialCards.forEach(function(element){
   cardsElement.querySelector('.element__title').textContent = element.name;
   
   //увеличение картинок
+  
   let popupImage = document.querySelector('.popup__zoom-card');
-  let openImage = document.querySelector('.popup__zoom-image').src;
-  let openTitle = document.querySelector('.popup__zoome-title');
-  function openPopupImage(){
-    popupImage.classList.add('popup_opened');
-  }
-  popupImage.addEventListener('click', (evt)=>{
-    openPopupImage()
-    element.link = openImage;
+  let openImage = popupImage.querySelector('.popup__zoom-image');
+  let openTitle = popupImage.querySelector('.popup__zoome-title');
+  
+  cardsElement.querySelector('.element__image').addEventListener('click', () => {
+    openPopup(popupImage);
     
+    openImage.src = element.link;
+    openTitle.textContent = element.name;
   });
 
   //лайки
@@ -135,6 +135,6 @@ const handleEditImageSubmit = (evt) => {
     name,
     link,
   };
-  renderImageElement(galeryTemplate(mestoData));
+  renderImageElement(galeryList(mestoData));
   closePopup(editImageForm);
 }

@@ -1,0 +1,13 @@
+.popup__zoom-container{
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    right: 0;
+    bottom: 0;
+    align-items: center;
+    justify-content: center;
+    z-index: 99;
+    background-color: #000000;
+}

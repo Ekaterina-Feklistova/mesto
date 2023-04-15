@@ -11,7 +11,7 @@
     right: 20px;
     top: 20px;
     cursor: pointer;
-    z-index: 500;
+    z-index: 5;
 }
 .element__delete:hover{
     opacity: 0.6;
