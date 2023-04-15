@@ -76,7 +76,7 @@ initialCards.forEach(function(element){
   
   //увеличение картинок
   
-  let popupImage = document.querySelector('.popup__zoom-card');
+  let popupImage = document.querySelector('.popup_type_zoom-card');
   let openImage = popupImage.querySelector('.popup__zoom-image');
   let openTitle = popupImage.querySelector('.popup__zoome-title');
   
@@ -135,6 +135,32 @@ const handleEditImageSubmit = (evt) => {
     name,
     link,
   };
-  renderImageElement(galeryList(mestoData));
+  renderImageElement(createCard(handleEditImageSubmit));
   closePopup(editImageForm);
+};
+
+editImageForm.addEventListener('submit', handleEditImageSubmit);
+
+function createCard(element){
+  const cardsElement = galeryTemplate.cloneNode(true);
+  cardsElement.querySelector('.element__image').src = element.link;
+  cardsElement.querySelector('.element__title').textContent = element.name;
+
+  cardsElement.querySelector('.element__image').addEventListener('click', () => {
+    openPopup(popupImage);
+    
+    openImage.src = element.link;
+    openTitle.textContent = element.name;
+  });
+
+  //лайки
+  cardsElement.querySelector('.element__like').addEventListener('click', function(evt){
+    evt.target.classList.toggle('element__like_active');
+  });
+  
+  //удаление
+  cardsElement.querySelector('.element__delete').addEventListener('click', function(evt){
+    const listItem = evt.target.closest('.element');
+    listItem.remove();
+  });
 }
