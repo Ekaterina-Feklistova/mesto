@@ -107,7 +107,7 @@ initialCards.forEach(function(element){
 
 //ищем кнопку добавления +
 const addMestoButton = document.querySelector('.profile__button');
-const popupAddMesto = document.querySelector('.popup__add');
+const popupAddMesto = document.querySelector('.popup_add');
 //ищем в html кнопку закрытия попапа добавить
 const popupCloseMesto = document.querySelector('.popup__close-add');
 
