@@ -68,6 +68,11 @@ const initialCards = [
 const galeryList = document.querySelector('.elements');
 const galeryTemplate = document.querySelector('.element__template').content;
 
+let popupImage = document.querySelector('.popup_type_zoom-card');
+let openImage = popupImage.querySelector('.popup__zoom-image');
+let openTitle = popupImage.querySelector('.popup__zoome-title');
+const closeImage = popupImage.querySelector('.popup__close_zoom');
+
 initialCards.forEach(function(element){
   
   const cardsElement = galeryTemplate.cloneNode(true);
@@ -75,13 +80,7 @@ initialCards.forEach(function(element){
   cardsElement.querySelector('.element__title').textContent = element.name;
   
   //увеличение картинок
-  
-  let popupImage = document.querySelector('.popup_type_zoom-card');
-  let openImage = popupImage.querySelector('.popup__zoom-image');
-  let openTitle = popupImage.querySelector('.popup__zoome-title');
-  const closeImage = popupImage.querySelector('.popup__close_zoom');
-  
-  cardsElement.querySelector('.element__image').addEventListener('click', () => {
+    cardsElement.querySelector('.element__image').addEventListener('click', () => {
     openPopup(popupImage);
     
     openImage.src = element.link;
@@ -149,7 +148,7 @@ function createCard(element){
   const cardsElement = galeryTemplate.cloneNode(true);
   cardsElement.querySelector('.element__image').src = element.link;
   cardsElement.querySelector('.element__title').textContent = element.name;
-
+  
   cardsElement.querySelector('.element__image').addEventListener('click', () => {
     openPopup(popupImage);
     

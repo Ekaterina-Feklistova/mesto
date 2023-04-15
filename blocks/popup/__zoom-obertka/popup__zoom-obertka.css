@@ -1,15 +1,5 @@
 .popup__zoom-obertka{
     display: flex;
     flex-direction: column;
-    position: fixed;
-    top: 0px;
-    left: 0px;
-    right: 0;
-    bottom: 0;
-    align-items: center;
-    justify-content: center;
-    z-index: 99;
-    background-color: #000000;
-    max-width: 75vw;
-    max-height: 75vh;
+    gap: 10px;
 }
