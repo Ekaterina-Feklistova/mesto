@@ -79,12 +79,16 @@ initialCards.forEach(function(element){
   let popupImage = document.querySelector('.popup_type_zoom-card');
   let openImage = popupImage.querySelector('.popup__zoom-image');
   let openTitle = popupImage.querySelector('.popup__zoome-title');
+  const closeImage = popupImage.querySelector('.popup__close_zoom');
   
   cardsElement.querySelector('.element__image').addEventListener('click', () => {
     openPopup(popupImage);
     
     openImage.src = element.link;
     openTitle.textContent = element.name;
+  });
+  closeImage.addEventListener('click', () => {
+    closePopup(popupImage);
   });
 
   //лайки
@@ -135,8 +139,8 @@ const handleEditImageSubmit = (evt) => {
     name,
     link,
   };
-  renderImageElement(createCard(handleEditImageSubmit));
-  closePopup(editImageForm);
+  renderImageElement(createCard(mestoData));
+  closePopup(popupAddMesto);
 };
 
 editImageForm.addEventListener('submit', handleEditImageSubmit);
@@ -152,6 +156,9 @@ function createCard(element){
     openImage.src = element.link;
     openTitle.textContent = element.name;
   });
+  closeImage.addEventListener('click', () => {
+    closePopup(popupImage);
+  });
 
   //лайки
   cardsElement.querySelector('.element__like').addEventListener('click', function(evt){
@@ -163,4 +170,5 @@ function createCard(element){
     const listItem = evt.target.closest('.element');
     listItem.remove();
   });
+  return cardsElement;
 }
