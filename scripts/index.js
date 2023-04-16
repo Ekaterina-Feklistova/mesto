@@ -1,78 +1,92 @@
 //Редактирования Профиля
-const buttonPencil = document.querySelector('.profile__button-info'); //ищем в html кнопку редактирования профиля
-const popupProfile = document.querySelector('.popup'); //ищем в html попап с карандашиком
-const pencilClose = popupProfile.querySelector('.popup__close'); //ищем в html кнопку закрытия попапа с карандашиком
-const profileForm = popupProfile.querySelector('.popup__form'); //ищем форму//
-const nameInput = popupProfile.querySelector('.popup__input_type_name'); //ищем в html форму ввода имени профиля
-const professoinInput = popupProfile.querySelector('.popup__input_type_subname'); //и профессии
+const popupProfile = document.querySelector('.popup_type_profil');
+const buttonEditProfilePencil = document.querySelector('.profile__button-info');
+const buttonCloseProfile = popupProfile.querySelector('.popup__close_type_profil');
+const profileForm = popupProfile.querySelector('.popup__form_type_profil');
+const nameInputProfileForm = popupProfile.querySelector('.popup__input_type_name');
+const professoinInputProfileForm = popupProfile.querySelector('.popup__input_type_subname');
 
-let nameProfile = document.querySelector('.profile__title');
-let professionProfile = document.querySelector('.profile__subtitle');
+const nameProfile = document.querySelector('.profile__title');
+const professionProfile = document.querySelector('.profile__subtitle');
 
-buttonPencil.addEventListener('click', () => { //открытие попапа "Редактировать профиль"
-    openPopup(popupProfile);
-    nameInput.value = nameProfile.textContent;
-    professoinInput.value = professionProfile.textContent;
-});
+//Галерея картинок
+const galeryList = document.querySelector('.elements');
+const galeryTemplate = document.querySelector('.element__template').content.querySelector('.element');
 
-pencilClose.addEventListener('click', () => { //закрытие попапа "Редактировать профиль"
-    closePopup(popupProfile);
-});
+//Увеличение картинок
+const popupZoomImage = document.querySelector('.popup_type_zoom-card');
+const openZoomImage = popupZoomImage.querySelector('.popup__zoom-image');
+const openZoomTitle = popupZoomImage.querySelector('.popup__zoome-title');
+const closeZoomImage = popupZoomImage.querySelector('.popup__close_zoom');
 
-profileForm.addEventListener('submit', (event) => { //обработчик события на кнопке Сохранить
-    event.preventDefault();
-    nameProfile.textContent = nameInput.value;
-    professionProfile.textContent = professoinInput.value;
-    closePopup(popupProfile);
-});
+//Добавить место
+const buttonAddMesto = document.querySelector('.profile__button');
+const popupAddMesto = document.querySelector('.popup_add');
+const buttonCloseMesto = document.querySelector('.popup__close-add');
 
 //многоразовая функция Открытия
 const openPopup = (popup)=>{
-    popup.classList.add('popup_opened');
+  popup.classList.add('popup_opened');
 };
 
 //многоразовая функция Закрытия
 const closePopup = (popup)=> {
-    popup.classList.remove('popup_opened');
+  popup.classList.remove('popup_opened');
 };
-////////////////////////////////////////////////////////////////////////////
-//массив с фотографиями мест
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
+
+//функция создания новой карточки с Местом
+function createCard(element){
+  const cardsElement = galeryTemplate.cloneNode(true);
+  cardsElement.querySelector('.element__image').src = element.link;
+  cardsElement.querySelector('.element__title').textContent = element.name;
+
+  cardsElement.querySelector('.element__image').addEventListener('click', () => {
+    openPopup(popupZoomImage);
+    
+    openZoomImage.src = element.link;
+    openZoomTitle.textContent = element.name;
+  });
+  closeZoomImage.addEventListener('click', () => {
+    closePopup(popupZoomImage);
+  });
+
+  //лайки
+  cardsElement.querySelector('.element__like').addEventListener('click', function(evt){
+    evt.target.classList.toggle('element__like_active');
+  });
+  
+  //удаление
+  cardsElement.querySelector('.element__delete').addEventListener('click', function(evt){
+    const listItem = evt.target.closest('.element');
+    listItem.remove();
+  });
+  return cardsElement;
+}
+
+//Функционал "Редактировать профиль"
+//открытие попапа "Редактировать профиль"
+buttonEditProfilePencil.addEventListener('click', () => {
+    openPopup(popupProfile);
+    nameInputProfileForm.value = nameProfile.textContent;
+    professoinInputProfileForm.value = professionProfile.textContent;
+});
+
+//закрытие попапа "Редактировать профиль"
+buttonCloseProfile.addEventListener('click', () => {
+    closePopup(popupProfile);
+});
+
+//обработчик события на кнопке Сохранить
+profileForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+    nameProfile.textContent = nameInputProfileForm.value;
+    professionProfile.textContent = professoinInputProfileForm.value;
+    closePopup(popupProfile);
+});
+
 //добавление массива в html
-//ищем место для галереи фотографий мест
-const galeryList = document.querySelector('.elements');
-const galeryTemplate = document.querySelector('.element__template').content;
-
-let popupImage = document.querySelector('.popup_type_zoom-card');
-let openImage = popupImage.querySelector('.popup__zoom-image');
-let openTitle = popupImage.querySelector('.popup__zoome-title');
-const closeImage = popupImage.querySelector('.popup__close_zoom');
-
+//уважаемый ревьюер, я не совсем понимаю, как здесь вызвать функцию создания карточки,
+//объясните мне подробнее пожалуйста
 initialCards.forEach(function(element){
   
   const cardsElement = galeryTemplate.cloneNode(true);
@@ -81,13 +95,14 @@ initialCards.forEach(function(element){
   
   //увеличение картинок
     cardsElement.querySelector('.element__image').addEventListener('click', () => {
-    openPopup(popupImage);
+    openPopup(popupZoomImage);
     
-    openImage.src = element.link;
-    openTitle.textContent = element.name;
+    openZoomImage.src = element.link;
+    openZoomTitle.textContent = element.name;
+    openZoomImage.setAttribute('alt',element.name);
   });
-  closeImage.addEventListener('click', () => {
-    closePopup(popupImage);
+  closeZoomImage.addEventListener('click', () => {
+    closePopup(popupZoomImage);
   });
 
   //лайки
@@ -104,19 +119,13 @@ initialCards.forEach(function(element){
   galeryList.append(cardsElement);
 });
 
-//ищем кнопку добавления +
-const addMestoButton = document.querySelector('.profile__button');
-const popupAddMesto = document.querySelector('.popup_add');
-//ищем в html кнопку закрытия попапа добавить
-const popupCloseMesto = document.querySelector('.popup__close-add');
-
 //открытие попапа "Добавить место"
-addMestoButton.addEventListener('click', () => {
+buttonAddMesto.addEventListener('click', () => {
   openPopup(popupAddMesto);
 });
 
 //закрытие попапа "Добавить место"
-popupCloseMesto.addEventListener('click', () => {
+buttonCloseMesto.addEventListener('click', () => {
   closePopup(popupAddMesto);
 });
 
@@ -143,31 +152,3 @@ const handleEditImageSubmit = (evt) => {
 };
 
 editImageForm.addEventListener('submit', handleEditImageSubmit);
-
-function createCard(element){
-  const cardsElement = galeryTemplate.cloneNode(true);
-  cardsElement.querySelector('.element__image').src = element.link;
-  cardsElement.querySelector('.element__title').textContent = element.name;
-  
-  cardsElement.querySelector('.element__image').addEventListener('click', () => {
-    openPopup(popupImage);
-    
-    openImage.src = element.link;
-    openTitle.textContent = element.name;
-  });
-  closeImage.addEventListener('click', () => {
-    closePopup(popupImage);
-  });
-
-  //лайки
-  cardsElement.querySelector('.element__like').addEventListener('click', function(evt){
-    evt.target.classList.toggle('element__like_active');
-  });
-  
-  //удаление
-  cardsElement.querySelector('.element__delete').addEventListener('click', function(evt){
-    const listItem = evt.target.closest('.element');
-    listItem.remove();
-  });
-  return cardsElement;
-}
