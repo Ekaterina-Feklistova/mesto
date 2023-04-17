@@ -16,7 +16,7 @@ const galeryTemplate = document.querySelector('.element__template').content.quer
 //Увеличение картинок
 const popupZoomImage = document.querySelector('.popup_type_zoom-card');
 const openZoomImage = popupZoomImage.querySelector('.popup__zoom-image');
-const openZoomTitle = popupZoomImage.querySelector('.popup__zoome-title');
+const openZoomTitle = popupZoomImage.querySelector('.popup__zoom-title');
 const closeZoomImage = popupZoomImage.querySelector('.popup__close_zoom');
 
 //Добавить место
@@ -45,6 +45,7 @@ function createCard(element){
     
     openZoomImage.src = element.link;
     openZoomTitle.textContent = element.name;
+    openZoomImage.setAttribute('alt',element.name);
   });
   closeZoomImage.addEventListener('click', () => {
     closePopup(popupZoomImage);
@@ -85,37 +86,8 @@ profileForm.addEventListener('submit', (event) => {
 });
 
 //добавление массива в html
-//уважаемый ревьюер, я не совсем понимаю, как здесь вызвать функцию создания карточки,
-//объясните мне подробнее пожалуйста
-initialCards.forEach(function(element){
-  
-  const cardsElement = galeryTemplate.cloneNode(true);
-  cardsElement.querySelector('.element__image').src = element.link;
-  cardsElement.querySelector('.element__title').textContent = element.name;
-  
-  //увеличение картинок
-    cardsElement.querySelector('.element__image').addEventListener('click', () => {
-    openPopup(popupZoomImage);
-    
-    openZoomImage.src = element.link;
-    openZoomTitle.textContent = element.name;
-    openZoomImage.setAttribute('alt',element.name);
-  });
-  closeZoomImage.addEventListener('click', () => {
-    closePopup(popupZoomImage);
-  });
-
-  //лайки
-  cardsElement.querySelector('.element__like').addEventListener('click', function(evt){
-    evt.target.classList.toggle('element__like_active');
-  });
-  
-  //удаление
-  cardsElement.querySelector('.element__delete').addEventListener('click', function(evt){
-    const listItem = evt.target.closest('.element');
-    listItem.remove();
-  });
-
+initialCards.forEach(function(element) {
+  const cardsElement = createCard(element);
   galeryList.append(cardsElement);
 });
 
