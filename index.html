@@ -45,10 +45,16 @@
     <div class="popup__container">
       <button type="button" class="popup__close popup__close_type_profil" aria-label="Закрыть"></button>
       <h3 class="popup__title">Редактировать профиль</h3>
-      <form name="form-profile" class="popup__form popup__form_type_profil">
-        <input type="text" class="popup__input popup__input_type_name" name="name">
-        <input type="text" class="popup__input popup__input_type_subname" name="subname">
-        <button type="submit" class="popup__submit" aria-label="Сохранить изменения">Сохранить</button>
+      <form name="form-profile" class="popup__form popup__form_type_profil" novalidate>
+        <div class="popup__form-input">
+          <input id="name" type="text" class="popup__input popup__input_type_name" name="name" required minlength="2" maxlength="40" autocomplete="off">
+          <span id="error-name" class="form__input-error name-input-error"></span>
+        </div>
+        <div class="popup__form-input">
+          <input id="subname" type="text" class="popup__input popup__input_type_subname" name="subname" required minlength="2" maxlength="200" autocomplete="off">
+          <span id="error-subname" class="form__input-error subname-input-error"></span>
+        </div>
+        <button type="submit" class="popup__submit popup__submit_add" aria-label="Сохранить изменения">Сохранить</button>
       </form>
     </div>
   </div>
@@ -56,10 +62,16 @@
     <div class="popup__container">
       <button type="button" class="popup__close-add popup__close" aria-label="Закрыть"></button>
       <h3 class="popup__title">Новое место</h3>
-      <form name="form-profile" class="popup__form popup__form-add">
-        <input type="text" class="popup__input popup__input_type_mesto" name="mesto" placeholder="Название">
-        <input type="text" class="popup__input popup__input_type_image" name="image" placeholder="Ссылка на картинку">
-        <button type="submit" class="popup__submit" aria-label="Сохранить изменения">Сохранить</button>
+      <form name="form-profile" class="popup__form popup__form-add" novalidate>
+        <div class="popup__form-input">
+          <input id="mesto" type="text" class="popup__input popup__input_type_mesto" name="mesto" placeholder="Название" required minlength="2" maxlength="30" autocomplete="off">
+          <span id="error-mesto" class="form__input-error mesto-input-error"></span>
+        </div>
+        <div class="popup__form-input">
+          <input id="url" type="url" class="popup__input popup__input_type_image" name="url" placeholder="Ссылка на картинку" required autocomplete="off">
+          <span id="error-url" class="form__input-error url-input-error"></span>
+        </div>
+        <button type="submit" class="popup__submit popup__submit_add" aria-label="Сохранить изменения">Сохранить</button>
       </form>
     </div>
   </div>
@@ -75,6 +87,7 @@
     </div>
   </div>
   <script src ="./scripts/constants.js"></script>
+  <script src="./scripts/validate.js"></script>
   <script src ="./scripts/index.js"></script> 
 </body>
 </html>
