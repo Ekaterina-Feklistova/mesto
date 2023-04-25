@@ -37,10 +37,10 @@ function enableButton(inactiveButtonClass, button){
 };
 
 //функция проверки показа или скрытия кнопки
-function validityButton({ submitButtonSelector, inactiveButtonClass}, input){
-    const savedButton = document.querySelector(submitButtonSelector);
+function validityButton({ submitButtonSelector, inactiveButtonClass}, form){
+    const savedButton = form.querySelector(submitButtonSelector);
     
-    if (input.checkValidity()){
+    if (form.checkValidity()){
         enableButton(inactiveButtonClass, savedButton);
     } else {
         disableButton(inactiveButtonClass, savedButton);
@@ -48,14 +48,15 @@ function validityButton({ submitButtonSelector, inactiveButtonClass}, input){
 };
 
 function enableValidation({ formSelector, inputSelector, ...rest}) {
-    const forms = document.querySelectorAll(formSelector);
-    const formsArray = Array.from(forms);
+    const formsPopup = document.querySelectorAll(formSelector);
+    const formsArray = Array.from(formsPopup);
+    
     formsArray.forEach(function(form){
         //отключаем отправку для всех форм
         form.addEventListener('submit', function(evt){
             evt.preventDefault();
         });    
-    
+        
         const inputs = form.querySelectorAll(inputSelector);
         const inputsArray = Array.from(inputs);
         inputsArray.forEach(function(input){

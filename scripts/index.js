@@ -1,3 +1,5 @@
+//массив попапов
+const popupArray = document.querySelectorAll('.popup');
 //Редактирования Профиля
 const popupProfile = document.querySelector('.popup_type_profil');
 const buttonEditProfilePencil = document.querySelector('.profile__button-info');
@@ -27,12 +29,31 @@ const buttonCloseMesto = document.querySelector('.popup__close-add');
 //многоразовая функция Открытия
 const openPopup = (popup)=>{
   popup.classList.add('popup_opened');
+  document.addEventListener('keydown', keyHandler);
 };
 
 //многоразовая функция Закрытия
 const closePopup = (popup)=> {
   popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', keyHandler);
 };
+
+//закрытие формы через ESC
+function keyHandler(evt){
+  if (evt.key === 'Escape'){
+    const activePopup = document.querySelector('.popup_opened');
+    closePopup(activePopup);
+  };
+};
+
+//закрытие при клике на оверлей
+popupArray.forEach(function(popup){
+  popup.addEventListener('mousedown', (evt) =>{
+    if (evt.target.classList.contains('popup')){
+      closePopup(popup);
+    }
+  });
+});
 
 //функция создания новой карточки с Местом
 function createCard(element){
