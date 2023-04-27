@@ -1,25 +1,25 @@
 //функция, которая добвляет класс с ошибкой
-function inputShowErrorClass ({inputErrorClass}, input, errorElement) {
+function inputShowErrorClass ({inputErrorClass, errorSpan}, input, errorElement) {
     input.classList.add(inputErrorClass);
     errorElement.textContent = input.validationMessage;
-    errorElement.classList.add('form__input-error');
+    errorElement.classList.add(errorSpan);
 };
 
 //функция, которая убирает класс с ошибкой
-function inputHideErrorClass ({inputErrorClass}, input, errorElement) {
+function inputHideErrorClass ({inputErrorClass, errorSpan}, input, errorElement) {
     input.classList.remove(inputErrorClass);
     errorElement.textContent = '';
-    errorElement.classList.remove('form__input-error');
+    errorElement.classList.remove(errorSpan);
 };
 
 //функция, которая проверяет валидность поля
-function checkedValidity ({ inputErrorClass }, input) {
+function checkedValidity ({inputErrorClass, errorSpan }, input) {
     const errorElement = document.querySelector(`#error-${input.id}`);
     
     if (! input.validity.valid){
-        inputShowErrorClass(inputErrorClass, input, errorElement);
+        inputShowErrorClass({inputErrorClass, errorSpan}, input, errorElement);
     } else {
-        inputHideErrorClass(inputErrorClass, input, errorElement);
+        inputHideErrorClass({inputErrorClass, errorSpan}, input, errorElement);
     };
 };
 
@@ -65,7 +65,7 @@ function enableValidation({ formSelector, inputSelector, ...rest}) {
                 //кнопка
                 validityButton(rest, form);
             });
-        });
+        }); 
     });
 };
 
@@ -75,5 +75,6 @@ enableValidation({
     submitButtonSelector: '.popup__submit',
     inactiveButtonClass: 'popup__submit_add',
     inputErrorClass: 'popup__input_type_error',
-    errorClass: 'form__input-error_visible'
+    errorClass: 'form__input-error_visible',
+    errorSpan: 'form__input-error'
   }); 

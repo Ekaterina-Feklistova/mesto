@@ -25,21 +25,24 @@ const closeZoomImage = popupZoomImage.querySelector('.popup__close_zoom');
 const buttonAddMesto = document.querySelector('.profile__button');
 const popupAddMesto = document.querySelector('.popup_add');
 const buttonCloseMesto = document.querySelector('.popup__close-add');
+const editImageForm = document.querySelector('.popup__form-add');
+const nameMesto = editImageForm.querySelector('.popup__input_type_mesto');
+const imageMesto = editImageForm.querySelector('.popup__input_type_image');
 
 //многоразовая функция Открытия
 const openPopup = (popup)=>{
   popup.classList.add('popup_opened');
-  document.addEventListener('keydown', keyHandler);
+  document.addEventListener('keydown', handleEscape);
 };
 
 //многоразовая функция Закрытия
 const closePopup = (popup)=> {
   popup.classList.remove('popup_opened');
-  document.removeEventListener('keydown', keyHandler);
+  document.removeEventListener('keydown', handleEscape);
 };
 
 //закрытие формы через ESC
-function keyHandler(evt){
+function handleEscape(evt){
   if (evt.key === 'Escape'){
     const activePopup = document.querySelector('.popup_opened');
     closePopup(activePopup);
@@ -58,19 +61,18 @@ popupArray.forEach(function(popup){
 //функция создания новой карточки с Местом
 function createCard(element){
   const cardsElement = galeryTemplate.cloneNode(true);
-  cardsElement.querySelector('.element__image').src = element.link;
+  const cardElementImage = cardsElement.querySelector('.element__image');
+  cardElementImage.src = element.link;
   cardsElement.querySelector('.element__title').textContent = element.name;
+  cardElementImage.setAttribute('alt',element.name);
 
-  cardsElement.querySelector('.element__image').addEventListener('click', () => {
+  cardElementImage.addEventListener('click', () => {
     openPopup(popupZoomImage);
     
     openZoomImage.src = element.link;
     openZoomTitle.textContent = element.name;
     openZoomImage.setAttribute('alt',element.name);
-  });
-  closeZoomImage.addEventListener('click', () => {
-    closePopup(popupZoomImage);
-  });
+  });  
 
   //лайки
   cardsElement.querySelector('.element__like').addEventListener('click', function(evt){
@@ -84,6 +86,11 @@ function createCard(element){
   });
   return cardsElement;
 }
+
+//закрытие увеличенной картинки
+closeZoomImage.addEventListener('click', () => {
+  closePopup(popupZoomImage);
+});
 
 //Функционал "Редактировать профиль"
 //открытие попапа "Редактировать профиль"
@@ -126,12 +133,9 @@ buttonCloseMesto.addEventListener('click', () => {
 const renderImageElement = (cardsElement) => {
   galeryList.prepend(cardsElement);
 }
-const editImageForm = document.querySelector('.popup__form-add');
+
 const handleEditImageSubmit = (evt) => {
   evt.preventDefault();
-
-  const nameMesto = editImageForm.querySelector('.popup__input_type_mesto');
-  const imageMesto = editImageForm.querySelector('.popup__input_type_image');
 
   const name = nameMesto.value;
   const link = imageMesto.value;
@@ -140,8 +144,10 @@ const handleEditImageSubmit = (evt) => {
     name,
     link,
   };
+  
   renderImageElement(createCard(mestoData));
   closePopup(popupAddMesto);
+  editImageForm.reset();
 };
 
 editImageForm.addEventListener('submit', handleEditImageSubmit);
