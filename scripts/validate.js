@@ -57,6 +57,10 @@ function enableValidation({ formSelector, inputSelector, ...rest}) {
             evt.preventDefault();
         });    
         
+        form.addEventListener('reset', function(evt) {
+            console.log(evt);
+            validityButton(rest, form);
+        })
         const inputs = form.querySelectorAll(inputSelector);
         const inputsArray = Array.from(inputs);
         inputsArray.forEach(function(input){
