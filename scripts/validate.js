@@ -1,25 +1,25 @@
 //функция, которая добвляет класс с ошибкой
-function inputShowErrorClass ({inputErrorClass, errorSpan}, input, errorElement) {
+function showInputError ({inputErrorClass, errorSpan}, input, errorElement) {
     input.classList.add(inputErrorClass);
     errorElement.textContent = input.validationMessage;
     errorElement.classList.add(errorSpan);
 };
 
 //функция, которая убирает класс с ошибкой
-function inputHideErrorClass ({inputErrorClass, errorSpan}, input, errorElement) {
+function hideInputError ({inputErrorClass, errorSpan}, input, errorElement) {
     input.classList.remove(inputErrorClass);
     errorElement.textContent = '';
     errorElement.classList.remove(errorSpan);
 };
 
 //функция, которая проверяет валидность поля
-function checkedValidity ({inputErrorClass, errorSpan }, input) {
+function checkValidity ({inputErrorClass, errorSpan }, input) {
     const errorElement = document.querySelector(`#error-${input.id}`);
     
     if (! input.validity.valid){
-        inputShowErrorClass({inputErrorClass, errorSpan}, input, errorElement);
+        showInputError({inputErrorClass, errorSpan}, input, errorElement);
     } else {
-        inputHideErrorClass({inputErrorClass, errorSpan}, input, errorElement);
+        hideInputError({inputErrorClass, errorSpan}, input, errorElement);
     };
 };
 
@@ -47,26 +47,26 @@ function validityButton({ submitButtonSelector, inactiveButtonClass}, form){
     };
 };
 
-function enableValidation({ formSelector, inputSelector, ...rest}) {
+function enableValidation({ formSelector, inputSelector, inactiveButtonClass, ...rest}) {
     const formsPopup = document.querySelectorAll(formSelector);
     const formsArray = Array.from(formsPopup);
+    
     
     formsArray.forEach(function(form){
         //отключаем отправку для всех форм
         form.addEventListener('submit', function(evt){
             evt.preventDefault();
         });    
-        
+        const savedButton = form.querySelector(inactiveButtonClass);
+        //очистка формы
         form.addEventListener('reset', function(evt) {
-            evt.preventDefault();
-            inputsArray.forEach(input => input.value = '');
-            validityButton(rest, form);
-        })
+            disableButton(inactiveButtonClass, savedButton);
+        });
         const inputs = form.querySelectorAll(inputSelector);
         const inputsArray = Array.from(inputs);
         inputsArray.forEach(function(input){
             input.addEventListener('input', () => {
-                checkedValidity(rest, input);
+                checkValidity(rest, input);
                 //кнопка
                 validityButton(rest, form);
             });
