@@ -47,21 +47,22 @@ function validityButton({ submitButtonSelector, inactiveButtonClass}, form){
     };
 };
 
-function enableValidation({ formSelector, inputSelector, inactiveButtonClass, ...rest}) {
+function enableValidation({ formSelector, inputSelector, ...rest}) {
     const formsPopup = document.querySelectorAll(formSelector);
     const formsArray = Array.from(formsPopup);
-    
-    
+        
     formsArray.forEach(function(form){
         //отключаем отправку для всех форм
         form.addEventListener('submit', function(evt){
             evt.preventDefault();
         });    
-        const savedButton = form.querySelector(inactiveButtonClass);
+        
         //очистка формы
+        const savedButton = form.querySelector(rest.submitButtonSelector);
         form.addEventListener('reset', function(evt) {
-            disableButton(inactiveButtonClass, savedButton);
+            disableButton(rest.inactiveButtonClass, savedButton);
         });
+
         const inputs = form.querySelectorAll(inputSelector);
         const inputsArray = Array.from(inputs);
         inputsArray.forEach(function(input){
