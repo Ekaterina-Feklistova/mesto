@@ -37,9 +37,7 @@ function enableButton(inactiveButtonClass, button){
 };
 
 //функция проверки показа или скрытия кнопки
-function validityButton({ submitButtonSelector, inactiveButtonClass}, form){
-    const savedButton = form.querySelector(submitButtonSelector);
-    
+function validityButton({ inactiveButtonClass}, form, savedButton){
     if (form.checkValidity()){
         enableButton(inactiveButtonClass, savedButton);
     } else {
@@ -69,7 +67,7 @@ function enableValidation({ formSelector, inputSelector, ...rest}) {
             input.addEventListener('input', () => {
                 checkValidity(rest, input);
                 //кнопка
-                validityButton(rest, form);
+                validityButton(rest, form, savedButton);
             });
         }); 
     });
