@@ -1,3 +1,4 @@
+import { initialCards, Card, cardList } from './Card.js';
 //массив попапов
 const popupArray = document.querySelectorAll('.popup');
 //Редактирования Профиля
@@ -11,15 +12,15 @@ const professoinInputProfileForm = popupProfile.querySelector('.popup__input_typ
 const nameProfile = document.querySelector('.profile__title');
 const professionProfile = document.querySelector('.profile__subtitle');
 
-//Галерея картинок
+/*//Галерея картинок
 const galeryList = document.querySelector('.elements');
-const galeryTemplate = document.querySelector('.element__template').content.querySelector('.element');
+const galeryTemplate = document.querySelector('.element__template').content.querySelector('.element');*/
 
-//Увеличение картинок
+/*//Увеличение картинок
 const popupZoomImage = document.querySelector('.popup_type_zoom-card');
 const openZoomImage = popupZoomImage.querySelector('.popup__zoom-image');
 const openZoomTitle = popupZoomImage.querySelector('.popup__zoom-title');
-const closeZoomImage = popupZoomImage.querySelector('.popup__close_zoom');
+const closeZoomImage = popupZoomImage.querySelector('.popup__close_zoom');*/
 
 //Добавить место
 const buttonAddMesto = document.querySelector('.profile__button');
@@ -59,7 +60,7 @@ popupArray.forEach(function(popup){
 });
 
 //функция создания новой карточки с Местом
-function createCard(element){
+/*function createCard(element){
   const cardsElement = galeryTemplate.cloneNode(true);
   const cardElementImage = cardsElement.querySelector('.element__image');
   cardElementImage.src = element.link;
@@ -85,12 +86,12 @@ function createCard(element){
     listItem.remove();
   });
   return cardsElement;
-}
+}*/
 
-//закрытие увеличенной картинки
+/*//закрытие увеличенной картинки
 closeZoomImage.addEventListener('click', () => {
   closePopup(popupZoomImage);
-});
+});*/
 
 //Функционал "Редактировать профиль"
 //открытие попапа "Редактировать профиль"
@@ -114,9 +115,10 @@ profileForm.addEventListener('submit', (event) => {
 });
 
 //добавление массива в html
-initialCards.forEach(function(element) {
-  const cardsElement = createCard(element);
-  galeryList.append(cardsElement);
+initialCards.forEach((item) => {
+  const card = new Card(item);
+  const cardElement = card.generateCard();
+  cardList.append(cardElement);
 });
 
 //открытие попапа "Добавить место"
