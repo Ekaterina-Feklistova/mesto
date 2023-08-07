@@ -132,3 +132,6 @@ const config = {
 
 const profileValidator = new FormValidator(config, popupProfile);
 profileValidator.enableValidation();
+
+const cardValidator = new FormValidator(config, popupAddMesto);
+cardValidator.enableValidation();
