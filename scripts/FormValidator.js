@@ -53,7 +53,6 @@ class FormValidator {
 
     //функция проверки показа или скрытия кнопки
     _validityButton(form, savedButton){
-        console.log(this._formElement)
         if (form.checkValidity()){
             this._enableButton(savedButton);
         } else {
