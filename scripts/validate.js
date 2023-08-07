@@ -69,6 +69,7 @@ function enableValidation({ formSelector, inputSelector, ...rest}) {
                 //кнопка
                 validityButton(rest, form, savedButton);
             });
+            console.log(form)
         }); 
     });
 };

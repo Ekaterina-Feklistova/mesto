@@ -1,94 +1,79 @@
-//Массив с фотографиями мест
-export const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
+import { initialCards } from './costants.js';
 
 export const cardList = document.querySelector('.elements');
 const popupElement = document.querySelector('.popup_type_zoom-card');
-const popupCloseButton = popupElement.querySelector('.popup__close_zoom');
 const popupImage = popupElement.querySelector('.popup__zoom-image');
-const popupCaption = popupElement.querySelector('.popup__zoom-title');
-const elementLike = document.querySelector('.element__like');
-const elementDelete = document.querySelector('.element__delete');
+const popupCaption = popupElement.querySelector('.popup__zoom-title')
+const popupCloseButton = popupElement.querySelector('.popup__close_zoom');
+                           
 
-export class Card {
+class Card {
   constructor(data){
     this._name = data.name;
     this._link = data.link;
-    
-    /*this._templateSelector = templateSelector;*/
   }
+
+  //шаблон места
   _getTemplate(){
-    const cardElement = document
-    .querySelector('.element__template')
+    const newTemplate = document
+    .querySelector('#mesto-template')
     .content
     .querySelector('.element')
     .cloneNode(true);
 
-    return cardElement;
+    return newTemplate;
   }
-  generateCard(){
-    this._element = this._getTemplate();
-    this._setEventListeners();
-    this._element.querySelector('.element__image').src = this._link;
-    this._element.querySelector('.element__title').textContent = this._name;
-    /*this._element.setAttribute('alt',element.name);*/
-        
-    return this._element;
-  }
+
+  //открытие попапа с увеличением картинки
   _handleOpenPopup(){
     popupImage.src = this._link;
     popupElement.classList.add('popup_opened');
     popupCaption.textContent = this._name;
   }
+
+  //закрите попапа
   _handleClosePopup(){
     popupImage.src = '';
     popupElement.classList.remove('popup_opened');
   }
   
+  //ставим лайк
   _handleLikeImage(){
-    this._element.classList.toggle('element__like_active');
+    this._elementLike.classList.toggle('element__like_active');
   }
+
+  //удаляем картинку
+  _handleImageDelete(){
+    this._elementDelete.closest('.element').remove();
+  }
+
+  //слушатели
   _setEventListeners(){
+    //клик на картинку для увеличения
     this._elementImage = this._element.querySelector('.element__image');
     this._elementImage.addEventListener('click', () => this._handleOpenPopup());
+    
+    //клик на кнопку закрытия попапа
     popupCloseButton.addEventListener('click', () => this._handleClosePopup());
+    
+    //клик на кнопку лайк
     this._elementLike = this._element.querySelector('.element__like');
     this._elementLike.addEventListener('click', () => this._handleLikeImage());
+    
+    //клик на кнопку удаления
+    this._elementDelete = this._element.querySelector('.element__delete');
+    this._elementDelete.addEventListener('click', () => this._handleImageDelete());
   }
-  /*//лайки
-  cardsElement.querySelector('.element__like').addEventListener('click', function(evt){
-    evt.target.classList.toggle('element__like_active');
-  });
-  
-  //удаление
-  cardsElement.querySelector('.element__delete').addEventListener('click', function(evt){
-    const listItem = evt.target.closest('.element');
-    listItem.remove();
-  });*/
+
+  //генерация карточки (создание)
+  generateCard(){
+    this._element = this._getTemplate();
+    this._setEventListeners();
+    this._element.querySelector('.element__image').src = this._link;
+    this._element.querySelector('.element__title').textContent = this._name;
+        
+    return this._element;
+  }
 };
 
-
+export default Card;
