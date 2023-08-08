@@ -1,11 +1,11 @@
 import { initialCards } from './costants.js';
 import Card from './Card.js';
 import FormValidator from './FormValidator.js';
-import { cardList } from './Card.js';
+
 
 //массив попапов
 const popupArray = document.querySelectorAll('.popup');
-
+const cardList = document.querySelector('.elements');
 //Редактирования Профиля
 const popupProfile = document.querySelector('.popup_type_profil');
 const buttonEditProfilePencil = document.querySelector('.profile__button-info');
@@ -17,7 +17,7 @@ const nameProfile = document.querySelector('.profile__title');
 const professionProfile = document.querySelector('.profile__subtitle');
 
 //Галерея картинок
-/*const galeryList = document.querySelector('.elements');*/
+
 const galeryTemplate = document.querySelector('.element__template');
 
 /*/Увеличение картинок
@@ -35,19 +35,26 @@ const nameMesto = editImageForm.querySelector('.popup__input_type_mesto');
 const imageMesto = editImageForm.querySelector('.popup__input_type_image');
 
 //многоразовая функция Открытия
-const openPopup = (popup)=>{
+export const openPopup = (popup)=>{
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', handleEscape);
 };
 
 //многоразовая функция Закрытия
-const closePopup = (popup)=> {
+export const closePopup = (popup)=> {
   popup.classList.remove('popup_opened');
   document.removeEventListener('keydown', handleEscape);
 };
 
+const createCard = (data) =>{
+  const card = new Card(data, galeryTemplate);
+  const newCard = card.generateCard();
+  cardList.append(newCard);
+  return newCard;
+};
+
 //закрытие формы через ESC
-function handleEscape(evt){
+export function handleEscape(evt){
   if (evt.key === 'Escape'){
     const activePopup = document.querySelector('.popup_opened');
     closePopup(activePopup);
@@ -57,7 +64,7 @@ function handleEscape(evt){
 //закрытие при клике на оверлей
 popupArray.forEach(function(popup){
   popup.addEventListener('mousedown', (evt) =>{
-    if (evt.target.classList.contains('popup')){
+    if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__submit_add')){
       closePopup(popup);
     }
   });
@@ -86,9 +93,10 @@ profileForm.addEventListener('submit', (event) => {
 
 //добавление массива в html
 initialCards.forEach((item) => {
-  const card = new Card(item);
-  const cardElement = card.generateCard();
-  cardList.append(cardElement);
+  /*const card = new Card(item);
+  const cardElement = card.generateCard();*/
+  createCard(item);
+  /*cardList.append(newCard);*/
 });
 
 //открытие попапа "Добавить место"
@@ -110,10 +118,11 @@ const handleSubmitAddMesto = (event) => {
     link: imageMesto.value
   }
 
-  const card = new Card(item, galeryTemplate);
-  const newCard = card.generateCard();
+  /*const card = new Card(item, galeryTemplate);
+  const newCard = card.generateCard();*/
+  createCard(item);
 
-  document.querySelector('.elements').prepend(newCard);
+  /*cardList.prepend(newCard);*/
   closePopup(popupAddMesto);
   editImageForm.reset();
 };

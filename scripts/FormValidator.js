@@ -1,7 +1,7 @@
 class FormValidator {
     constructor(data, formElement){
       this._formElement = formElement;
-      this.inputList = Array.from(document.querySelectorAll(data.input))
+      
       this._formSelector = data.formSelector;
       this._inputSelector = data.inputSelector;
       this._submitButtonSelector = data.submitButtonSelector;
@@ -39,16 +39,17 @@ class FormValidator {
     };
 
     //функция для скрывания кнопки
-    _disableButton(button){
-        button.setAttribute('disabled', '');
-        button.classList.add(this._inactiveButtonClass);
+    _disableButton(savedButton){
+        console.log(this._submitButtonSelector)
+        savedButton.setAttribute('disabled', '');
+        savedButton.classList.add(this._inactiveButtonClass);
         
     };
 
     //функция показа кнопки
-    _enableButton(button){
-        button.removeAttribute('disabled');
-        button.classList.remove(this._inactiveButtonClass);
+    _enableButton(savedButton){
+        savedButton.removeAttribute('disabled');
+        savedButton.classList.remove(this._inactiveButtonClass);
     };
 
     //функция проверки показа или скрытия кнопки

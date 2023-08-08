@@ -1,6 +1,5 @@
 import { initialCards } from './costants.js';
-
-export const cardList = document.querySelector('.elements');
+import { openPopup, closePopup, handleEscape } from './index.js';
 const popupElement = document.querySelector('.popup_type_zoom-card');
 const popupImage = popupElement.querySelector('.popup__zoom-image');
 const popupCaption = popupElement.querySelector('.popup__zoom-title')
@@ -15,26 +14,24 @@ class Card {
 
   //шаблон места
   _getTemplate(){
-    const newTemplate = document
+    return document
     .querySelector('#mesto-template')
     .content
     .querySelector('.element')
     .cloneNode(true);
-
-    return newTemplate;
   }
 
   //открытие попапа с увеличением картинки
   _handleOpenPopup(){
     popupImage.src = this._link;
-    popupElement.classList.add('popup_opened');
+    openPopup(popupElement);
     popupCaption.textContent = this._name;
   }
 
   //закрите попапа
   _handleClosePopup(){
     popupImage.src = '';
-    popupElement.classList.remove('popup_opened');
+    closePopup(popupElement);
   }
   
   //ставим лайк
