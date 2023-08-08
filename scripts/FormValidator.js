@@ -40,7 +40,6 @@ class FormValidator {
 
     //функция для скрывания кнопки
     _disableButton(savedButton){
-        console.log(savedButton)
         savedButton.setAttribute('disabled', '');
         savedButton.classList.add(this._inactiveButtonClass);
         
@@ -87,8 +86,7 @@ class FormValidator {
             //очистка формы
             const savedButton = form.querySelector(this._submitButtonSelector);
             form.addEventListener('reset', (evt) => {
-                console.log(savedButton)
-                this._disableButton(this._inactiveButtonClass, savedButton);
+                this._disableButton(savedButton);
             });
         });
     };
