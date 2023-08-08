@@ -49,7 +49,6 @@ export const closePopup = (popup)=> {
 const createCard = (data) =>{
   const card = new Card(data, galeryTemplate);
   const newCard = card.generateCard();
-  cardList.append(newCard);
   return newCard;
 };
 
@@ -93,10 +92,8 @@ profileForm.addEventListener('submit', (event) => {
 
 //добавление массива в html
 initialCards.forEach((item) => {
-  /*const card = new Card(item);
-  const cardElement = card.generateCard();*/
-  createCard(item);
-  /*cardList.append(newCard);*/
+  const card = createCard(item);
+  cardList.append(card);
 });
 
 //открытие попапа "Добавить место"
@@ -107,6 +104,7 @@ buttonAddMesto.addEventListener('click', () => {
 //закрытие попапа "Добавить место"
 buttonCloseMesto.addEventListener('click', () => {
   closePopup(popupAddMesto);
+  editImageForm.reset();
 });
 
 //добавление картинки в "Место"
@@ -118,11 +116,8 @@ const handleSubmitAddMesto = (event) => {
     link: imageMesto.value
   }
 
-  /*const card = new Card(item, galeryTemplate);
-  const newCard = card.generateCard();*/
-  createCard(item);
-
-  /*cardList.prepend(newCard);*/
+  const card = createCard(item);
+  cardList.prepend(card);
   closePopup(popupAddMesto);
   editImageForm.reset();
 };

@@ -40,7 +40,7 @@ class FormValidator {
 
     //функция для скрывания кнопки
     _disableButton(savedButton){
-        console.log(this._submitButtonSelector)
+        console.log(savedButton)
         savedButton.setAttribute('disabled', '');
         savedButton.classList.add(this._inactiveButtonClass);
         
@@ -63,7 +63,7 @@ class FormValidator {
     };
 
     enableValidation() {
-        const formsPopup = document.querySelectorAll(this._formSelector);
+        const formsPopup = this._formElement.querySelectorAll(this._formSelector);
         const formsArray = Array.from(formsPopup);
            
         formsArray.forEach((form) => {
@@ -72,12 +72,6 @@ class FormValidator {
                 evt.preventDefault();
             });    
             
-            //очистка формы
-            const savedButton = form.querySelector(this._submitButtonSelector);
-            form.addEventListener('reset', (evt) => {
-                this._disableButton(this._inactiveButtonClass, savedButton);
-            });
-
             const inputs = form.querySelectorAll(this._inputSelector);
             const inputsArray = Array.from(inputs);
             
@@ -89,6 +83,13 @@ class FormValidator {
                 });
                 
             }); 
+            
+            //очистка формы
+            const savedButton = form.querySelector(this._submitButtonSelector);
+            form.addEventListener('reset', (evt) => {
+                console.log(savedButton)
+                this._disableButton(this._inactiveButtonClass, savedButton);
+            });
         });
     };
 }
