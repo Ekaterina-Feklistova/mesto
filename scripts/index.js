@@ -17,14 +17,13 @@ const nameProfile = document.querySelector('.profile__title');
 const professionProfile = document.querySelector('.profile__subtitle');
 
 //Галерея картинок
-
 const galeryTemplate = document.querySelector('.element__template');
 
-/*/Увеличение картинок
-const popupZoomImage = document.querySelector('.popup_type_zoom-card');
-const openZoomImage = popupZoomImage.querySelector('.popup__zoom-image');
-const openZoomTitle = popupZoomImage.querySelector('.popup__zoom-title');
-const closeZoomImage = popupZoomImage.querySelector('.popup__close_zoom');*/
+//Увеличение картинок
+export const popupElement = document.querySelector('.popup_type_zoom-card');
+export const popupImage = popupElement.querySelector('.popup__zoom-image');
+export const popupCaption = popupElement.querySelector('.popup__zoom-title')
+export const popupCloseButton = popupElement.querySelector('.popup__close_zoom');
 
 //Добавить место
 const buttonAddMesto = document.querySelector('.profile__button');
@@ -63,7 +62,7 @@ export function handleEscape(evt){
 //закрытие при клике на оверлей
 popupArray.forEach(function(popup){
   popup.addEventListener('mousedown', (evt) =>{
-    if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__submit_add')){
+    if (evt.target.classList.contains('popup') || evt.target.classList.contains('.popup__close')){
       closePopup(popup);
     }
   });
@@ -75,6 +74,9 @@ buttonEditProfilePencil.addEventListener('click', () => {
     openPopup(popupProfile);
     nameInputProfileForm.value = nameProfile.textContent;
     professoinInputProfileForm.value = professionProfile.textContent;
+
+    const profileValidator = new FormValidator(config, profileForm);
+    profileValidator.enableValidation();
 });
 
 //закрытие попапа "Редактировать профиль"
@@ -99,12 +101,21 @@ initialCards.forEach((item) => {
 //открытие попапа "Добавить место"
 buttonAddMesto.addEventListener('click', () => {
   openPopup(popupAddMesto);
+
+  const cardValidator = new FormValidator(config, editImageForm);
+  cardValidator.enableValidation();
 });
 
 //закрытие попапа "Добавить место"
 buttonCloseMesto.addEventListener('click', () => {
   closePopup(popupAddMesto);
   editImageForm.reset();
+});
+
+//клик на кнопку закрытия попапа
+popupCloseButton.addEventListener('click', () => {
+    popupImage.src = '';
+    closePopup(popupElement);
 });
 
 //добавление картинки в "Место"
@@ -133,9 +144,3 @@ const config = {
   errorClass: 'form__input-error_visible',
   errorSpan: 'form__input-error'
 };
-
-const profileValidator = new FormValidator(config, popupProfile);
-profileValidator.enableValidation();
-
-const cardValidator = new FormValidator(config, popupAddMesto);
-cardValidator.enableValidation();

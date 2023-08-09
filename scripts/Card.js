@@ -1,9 +1,5 @@
 import { initialCards } from './costants.js';
-import { openPopup, closePopup, handleEscape } from './index.js';
-const popupElement = document.querySelector('.popup_type_zoom-card');
-const popupImage = popupElement.querySelector('.popup__zoom-image');
-const popupCaption = popupElement.querySelector('.popup__zoom-title')
-const popupCloseButton = popupElement.querySelector('.popup__close_zoom');
+import { openPopup, closePopup, handleEscape, popupElement, popupImage, popupCaption } from './index.js';
                            
 
 class Card {
@@ -27,12 +23,6 @@ class Card {
     openPopup(popupElement);
     popupCaption.textContent = this._name;
   }
-
-  //закрите попапа
-  _handleClosePopup(){
-    popupImage.src = '';
-    closePopup(popupElement);
-  }
   
   //ставим лайк
   _handleLikeImage(){
@@ -49,9 +39,6 @@ class Card {
     //клик на картинку для увеличения
     this._elementImage = this._element.querySelector('.element__image');
     this._elementImage.addEventListener('click', () => this._handleOpenPopup());
-    
-    //клик на кнопку закрытия попапа
-    popupCloseButton.addEventListener('click', () => this._handleClosePopup());
     
     //клик на кнопку лайк
     this._elementLike = this._element.querySelector('.element__like');
