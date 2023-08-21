@@ -28,8 +28,8 @@ export default class UserInfo{
 
     //принимает новые данные пользователя и добавляет их на страницу
     setUserInfo(dataUser){
-        this._inputName = dataUser.name;
-        this._inputInfo = dataUser.subname;
+        this._inputName.textContent = dataUser.name;
+        this._inputInfo.textContent = dataUser.subname;
     };
 
     setEventListeners(){

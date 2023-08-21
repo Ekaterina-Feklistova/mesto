@@ -1,11 +1,9 @@
-import { popupImage, popupCaption } from "../utils/costants.js";
-import Popup from "./Popup.js";
-import PopupWithImage from "./PopupWithImage.js";
 export default class Card {
-  constructor(data){
+  constructor(data, openZoomImage){
+    this._data = data;
     this._name = data.title;
     this._link = data.link;
-    
+    this._openZoomImage = openZoomImage;
   }
 
   //шаблон места
@@ -16,18 +14,10 @@ export default class Card {
     .querySelector('.element')
     .cloneNode(true);
   }
-  _openZoomImage(){
-    popupImage.src = this._link;
-    popupImage.alt = this._name;
-    popupCaption.textContent = this._name;
-    const openPopupZoomImage = new PopupWithImage('.element__image');
-    openPopupZoomImage.open()
-  }
+  
   //открытие попапа с увеличением картинки
   _handleCardClick = () => {
-    this._openZoomImage(this._data);
-    console.log('Вы кликнули на картинку')
-    
+    this._openZoomImage(this._data);    
   }
   
   //ставим лайк
