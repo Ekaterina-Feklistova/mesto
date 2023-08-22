@@ -20,12 +20,11 @@ export default class Popup{
         this.close();
     };
     _handleClickOverlay = (evt) => {
-        if (evt.target.classList.contains('popup_opened') || evt.target.classList.contains('.popup__close')) {
+        if (evt.target.classList.contains('popup_opened') || evt.target.classList.contains('popup__close')) {
             this.close()
         }
     };
     setEventListeners(){
-        this._closeButton.addEventListener('click', this._handleCloseButton)
         this._popup.addEventListener('click', this._handleClickOverlay)
     };
 }

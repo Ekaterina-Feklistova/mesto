@@ -7,7 +7,8 @@ class FormValidator {
       this._inactiveButtonClass = data.inactiveButtonClass;
       this._inputErrorClass = data.inputErrorClass;
       this._errorClass = data.errorClass;
-      this._errorSpan = data.errorSpan;     
+      this._errorSpan = data.errorSpan;
+      this._savedButton = this._form.querySelector(this._submitButtonSelector);    
     }    
         //функция, которая добвляет класс с ошибкой
     _showInputError (input, errorElement) {
@@ -36,25 +37,25 @@ class FormValidator {
     };
 
     //функция для скрывания кнопки
-    _disableButton(savedButton){
-        savedButton.setAttribute('disabled', '');
-        savedButton.classList.add(this._inactiveButtonClass);
+    _disableButton(){
+        this._savedButton.setAttribute('disabled', '');
+        this._savedButton.classList.add(this._inactiveButtonClass);
         
     };
 
     //функция показа кнопки
-    _enableButton(savedButton){
-        savedButton.removeAttribute('disabled');
-        savedButton.classList.remove(this._inactiveButtonClass);
+    _enableButton(){
+        this._savedButton.removeAttribute('disabled');
+        this._savedButton.classList.remove(this._inactiveButtonClass);
     };
 
     //функция проверки показа или скрытия кнопки
-    _validityButton(savedButton){
+    _validityButton(){
         
         if (this._form.checkValidity()){
-            this._enableButton(savedButton);
+            this._enableButton();
         } else {
-            this._disableButton(savedButton);
+            this._disableButton();
         };        
     };
 
@@ -71,14 +72,13 @@ class FormValidator {
             input.addEventListener('input', () => {
                 this._checkValidity(input);
                 //кнопка
-                this._validityButton(savedButton);
+                this._validityButton();
             });       
         }); 
             
         //очистка формы
-        const savedButton = this._form.querySelector(this._submitButtonSelector);
         this._form.addEventListener('reset', (evt) => {
-            this._disableButton(savedButton);
+            this._disableButton();
         });
     };
 }
