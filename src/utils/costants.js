@@ -8,6 +8,7 @@ export const buttonAddMesto = document.querySelector('.profile__button');
 export const editImageForm = document.querySelector('.popup__form-add');
 
 //селекторы
+export const templateSelector = '.element__template'
 export const popupProfileSelector = '.popup_type_profil';
 export const popupAddMestoSelector = '.popup_add';
 export const zoomSelector = '.popup_type_zoom-card';

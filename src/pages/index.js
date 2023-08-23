@@ -1,19 +1,19 @@
 import '../pages/index.css';
-import Card from '../scripts/components/Card.js';
-import FormValidator from '../scripts/components/FormValidator.js';
-import Section from '../scripts/components/Section.js';
-import UserInfo from '../scripts/components/UserInfo.js';
-import PopupWithForm from '../scripts/components/PopupWithForm.js';
-import PopupWithImage from '../scripts/components/PopupWithImage.js';
+import Card from '../components/Card.js';
+import FormValidator from '../components/FormValidator.js';
+import Section from '../components/Section.js';
+import UserInfo from '../components/UserInfo.js';
+import PopupWithForm from '../components/PopupWithForm.js';
+import PopupWithImage from '../components/PopupWithImage.js';
 import { 
   buttonEditProfilePencil, profileForm,
   buttonAddMesto,
-  editImageForm,
+  editImageForm, templateSelector,
   config, configUserInfo,
   popupProfileSelector, popupAddMestoSelector,
   zoomSelector, cardListSelector 
-} from '../scripts/utils/costants.js';
-import { initialCards } from '../scripts/utils/ArrayCards.js';
+} from '../utils/costants.js';
+import { initialCards } from '../utils/ArrayCards.js';
 
 const popupImage = new PopupWithImage(zoomSelector);
 const userInfo = new UserInfo(configUserInfo);
@@ -23,8 +23,9 @@ const cardValidator = new FormValidator(config, editImageForm);
 const section = new Section({ 
   items: initialCards,
   renderer: (data) => {
-    const card = new Card(data, popupImage.open);
-    return card.generateCard();
+    const card = new Card(data, templateSelector, popupImage.open);
+    section.addItem(card.generateCard());
+    
   }
 }, cardListSelector);
 section.renderItems();

@@ -1,15 +1,3 @@
-import Popup from "./Popup.js";
-import FormValidator from "./FormValidator.js";
-import { 
-    config,
-    popupProfile,
-    buttonEditProfilePencil,
-    buttonCloseProfile,
-    profileForm,
-    nameInputProfileForm,
-    professoinInputProfileForm
- } from "../utils/costants.js";
-
 export default class UserInfo{
     constructor(configUserInfo){
         this._inputName = document.querySelector(configUserInfo.profileNameSelector);
