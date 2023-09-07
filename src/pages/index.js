@@ -119,7 +119,7 @@ popupProfile.setEventListeners();
 popupAddMesto.setEventListeners();
 popupEditAvatar.setEventListeners();
 deletePopupCard.setEventListeners();
-document.querySelector('.profile__button_avatar').addEventListener('click', () => {
+document.querySelector('.profile__button-avatar').addEventListener('click', () => {
   popupEditAvatar.open()
 })
 
