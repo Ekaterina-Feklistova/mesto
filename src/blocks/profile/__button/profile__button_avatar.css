@@ -21,8 +21,8 @@
     background-image: url(../../../images/button-avatar.svg);
     background-size: 26px;
     background-repeat: no-repeat;
-    background-position: center;    
-    opacity: 0;    
+    background-position: center;
+    opacity: 0;
 }
 .profile__button_avatar:hover::before{
     cursor: pointer;
