@@ -9,7 +9,7 @@ export default class Api {
         return res.ok ? res.json() : Promise.reject
     }
      
-    getInfo() {
+    getUserInfo() {
         return fetch(`${this._url}/users/me`, {
             headers: {
                 authorization: this._authorization

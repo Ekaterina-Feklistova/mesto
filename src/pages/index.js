@@ -64,7 +64,7 @@ function createNewCard(data){
   return card.generateCard();
 };
 const section = new Section((element) => { 
-  section.addItemPrepend(createNewCard(element));    
+  section.addItemAppend(createNewCard(element));    
   }, cardListSelector);
 
 
@@ -79,15 +79,14 @@ const popupProfile = new PopupWithForm(popupProfileSelector, (data) => {
 });
 
 const popupAddMesto = new PopupWithForm(popupAddMestoSelector, (data) => {
-  Promise.all([api.getInfo(), api.addCard(data)])
-    .then(([dataUser, dataCard]) => {
-      dataCard.myId = dataUser._id;
+  api.addCard(data)
+    .then(dataCard => {
+      dataCard.myId = userInfo.getId()
       section.addItemPrepend(createNewCard(dataCard));
       popupAddMesto.close();
     })
     .catch((err) => console.log(`Ошибка при создании новой карточки ${err}`))
     .finally(() => popupAddMesto.setupDefaultText())
-  //section.addItemAppend(createNewCard(data)); 
 });
 
 const popupEditAvatar = new PopupWithForm(popupAvatarSelector, (data) => {
@@ -123,11 +122,11 @@ document.querySelector('.profile__button-avatar').addEventListener('click', () =
   popupEditAvatar.open()
 })
 
-Promise.all([api.getInfo(), api.getCards()])
+Promise.all([api.getUserInfo(), api.getCards()])
   .then(([dataUser, dataCard]) => {
-    
-    dataCard.forEach(element => element.myId = dataUser._id) 
-    userInfo.setUserInfo({ name: dataUser.name, subname: dataUser.about, avatar: dataUser.avatar })
+    dataCard.forEach(element => element.myId = dataUser._id); 
+    userInfo.setUserInfo({ name: dataUser.name, subname: dataUser.about, avatar: dataUser.avatar });
+    userInfo.setId(dataUser._id);
     section.renderItems(dataCard);
   })
-  //.catch((err) => console.log(`Ошибка при создании начальных данных ${err}`))
+  .catch((err) => console.log(`Ошибка при создании начальных данных ${err}`))

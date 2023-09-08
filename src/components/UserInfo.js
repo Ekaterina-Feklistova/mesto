@@ -16,5 +16,13 @@ export default class UserInfo{
         this._inputName.textContent = name;
         this._inputInfo.textContent = subname;
     };
+
+    setId(id){
+        this._id = id;
+    };
+
+    getId(){
+        return this._id;
+    }
 }
 

@@ -8,7 +8,9 @@ class FormValidator {
       this._inputErrorClass = data.inputErrorClass;
       this._errorClass = data.errorClass;
       this._errorSpan = data.errorSpan;
-      this._savedButton = this._form.querySelector(this._submitButtonSelector);    
+      this._savedButton = this._form.querySelector(this._submitButtonSelector);
+      this._inputs = this._form.querySelectorAll(this._inputSelector);
+      this._inputList = Array.from(this._inputs)
     }    
         //функция, которая добвляет класс с ошибкой
     _showInputError (input, errorElement) {
@@ -65,10 +67,10 @@ class FormValidator {
             evt.preventDefault();
         });    
             
-        const inputs = this._form.querySelectorAll(this._inputSelector);
-        const inputsArray = Array.from(inputs);
+        //const inputs = this._form.querySelectorAll(this._inputSelector);
+        //const inputsArray = Array.from(inputs);
         
-        inputsArray.forEach((input) => {
+        this._inputList.forEach((input) => {
             input.addEventListener('input', () => {
                 this._checkValidity(input);
                 //кнопка
